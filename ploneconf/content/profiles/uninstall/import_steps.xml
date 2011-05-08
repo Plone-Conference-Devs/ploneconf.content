@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<import-steps>
+  <import-step id="ploneconf.content.uninstall"
+               version="20110507"
+               handler="ploneconf.content.setuphandlers.uninstall"
+               title="ploneconf.content.uninstall">
+    Uninstall stuff
+  </import-step>
+ </import-steps>
+  

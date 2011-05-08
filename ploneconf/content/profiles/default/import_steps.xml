@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<import-steps>
+  <import-step id="ploneconf.content.addInitialContent"
+               version="20110507"
+               handler="ploneconf.content.setuphandlers.addInitialContent"
+               title="ploneconf.content.addInitialContent">
+    Add initial content
+  </import-step>
+ </import-steps>
+  

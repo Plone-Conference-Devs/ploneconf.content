@@ -9,11 +9,18 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="ploneconf.content"
+      title="Plone Conference Content"
       directory="profiles/default"
       description="Installs the ploneconf.content package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-  <!-- -*- extra stuff goes here -*- -->
-  
+         
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="Plone Conference Content Uninstall Profile"
+      directory="profiles/uninstall"
+      description="Uninstalls the ploneconf.content package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
 </configure>
