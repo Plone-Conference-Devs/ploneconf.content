@@ -25,6 +25,7 @@ def addInitialContent(context):
                 'sponsors' : 'Sponsors',
                 'volunteer' : 'Volunteer',
                 'mission' : 'Mission',
+                'index_html'  : 'Home',
             }
     
     # TODO: each folder will also have a home page
@@ -37,18 +38,17 @@ def addInitialContent(context):
                 
     # we should combine these into a mega structure at some point  
     # after the dust has settled 
-    folderContentsMap = { 'event' : [  'training', 'talks', 'open-spaces', 
+    folderContentsMap = { 'event' : ['index_html',  'training', 'talks', 'open-spaces', 
                                     'sprints', 'sponsor', 'why-attend',
-                                  ],
-                       'location-info': ['venue', 'travel', 'lodging', 
+                                    ],
+                       'location-info': ['index_html', 'venue', 'travel', 'lodging', 
                                     'location-details', 
                                    ],
-                       'party': [ 'performances', 'sponsors',
+                       'party': [ 'index_html', 'performances', 'sponsors',],
+                       'register': ['index_html'],
+                       'about': [ 'index_html', 'volunteer', 'mission',
                                 ],
-                       'register': [],
-                       'about': [ 'volunteer', 'mission',
-                                ],
-                       'legal': [],
+                       'legal': [ 'index_html' ],
                     }
                 
     
@@ -62,21 +62,24 @@ def addInitialContent(context):
             folder = site.get(id)
             workflowTool.doActionFor(folder, "publish")
             transaction.commit()
-        # TODO: add a home page if it doesn't exist and set 
-        # the default view to be that page
-        for page in folderContentsMap[id]:
-            if page in pages:
-                folder = site.get(id)
-                if not folder.get(page):
-                    transaction.begin()
-                    portal_types = getToolByName(folder, "portal_types")
-                    type_info = portal_types.getTypeInfo("Document")
-                    pageObj = type_info._constructInstance(folder, page)
-                    # TODO: set the title
-                    workflowTool.doActionFor(pageObj, "publish")
-                    transaction.commit()
-                    
-                    
+            for page in folderContentsMap[id]:
+                if page in pages:
+                    if not folder.get(page):
+                        transaction.begin()
+                        portal_types = getToolByName(folder, "portal_types")
+                        type_info = portal_types.getTypeInfo("Document")
+                        pageObj = type_info._constructInstance(folder, page,
+                                                                title=pages[page])
+                        workflowTool.doActionFor(pageObj, "publish")
+                        transaction.commit()
+            # if this is the 'home' page,
+            # set the default view of the folder to be that
+            # only do this after the home page has been created
+            # XXX: somthing is missing here. WhyTF isn't this working
+            # for now let's use index_html but at some point it miht be wise 
+            # to move away from that.
+            # folder.setDefaultPage("home")
+            # folder.setLayout("home")
         
         
 def uninstall(context):
