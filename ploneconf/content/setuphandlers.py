@@ -51,6 +51,7 @@ def addInitialContent(context):
                 'party': 'Party',
                 'register': 'Register',
                 'about': 'About',
+                'legal': 'Legal',
                 } 
                 
     # we should combine these into a mega structure at some point  
@@ -88,12 +89,11 @@ def addInitialContent(context):
                                                                 title=pages[page])
                         workflowTool.doActionFor(pageObj, "publish")
                         transaction.commit()
-            # if this is the 'home' page,
             # set the default view of the folder to be that
             # only do this after the home page has been created
             # XXX: somthing is missing here. WhyTF isn't this working
-            # for now let's use index_html but at some point it miht be wise 
-            # to move away from that.
+            # for now let's use index_html but at some point it might be wise 
+            # to move away from that hackiness
             # folder.setDefaultPage("home")
             # folder.setLayout("home")
         

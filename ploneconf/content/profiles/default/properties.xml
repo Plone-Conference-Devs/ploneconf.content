@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<site>
+ <property name="title">Plone Conference</property>
+ <property name="description">Your number one stop for Plone Conference 
+    information and registration.</property>
+ <property name="email_from_address"
+    type="string">info@ploneconf.org</property>
+ <property name="email_from_name"
+    type="string">Plone Conference Organizers</property>
+
+</site>
