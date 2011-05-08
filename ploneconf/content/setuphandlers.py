@@ -1,4 +1,3 @@
-from zope.app.component.hooks import getSite
 import transaction
 from Products.CMFCore.utils import getToolByName
 
@@ -9,7 +8,25 @@ def addInitialContent(context):
     '''
     if context.readDataFile('ploneconf.content.install.txt') is None:
         return
-    
+
+    site = context.getSite()
+
+    # bye bye Plone's default content
+    existing = site.keys()
+    for n in ('events', 'news', 'front-page'):
+        if n in existing:
+            transaction.begin()
+            del site[n]
+            transaction.commit()
+
+    # hide the Members folder
+    if 'Members' in existing:
+        transaction.begin()
+        members = site['Members']
+        members.getField('excludeFromNav').set(members, True)
+        members.reindexObject()
+        transaction.commit()
+
     # id: title
     pages = {   'training' : 'Training',
                 'talks' : 'Talks',
@@ -52,7 +69,6 @@ def addInitialContent(context):
                     }
                 
     
-    site = context.getSite()
     workflowTool = getToolByName(site, "portal_workflow")
     # add default pages and folders
     for id, title in folders.items():
