@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <!-- Please add the password when setting this up and don't commit! -->
 <object name="MailHost" meta_type="Mail Host" smtp_host="smtp.gmail.com"
-   smtp_port="587" smtp_pwd="" smtp_uid="info@ploneconf.org"/>
+   smtp_port="587" smtp_uid="ploneconf@gmail.com"/>
