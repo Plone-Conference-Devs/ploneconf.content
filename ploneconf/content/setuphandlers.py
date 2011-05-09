@@ -43,6 +43,7 @@ def addInitialContent(context):
                 'volunteer' : 'Volunteer',
                 'mission' : 'Mission',
                 'index_html'  : 'Home',
+                'non-profit' : '501c3',
             }
     
     # TODO: each folder will also have a home page
@@ -66,7 +67,7 @@ def addInitialContent(context):
                        'register': ['index_html'],
                        'about': [ 'index_html', 'volunteer', 'mission',
                                 ],
-                       'legal': [ 'index_html' ],
+                       'legal': [ 'index_html', 'non-profit'],
                     }
                 
     
