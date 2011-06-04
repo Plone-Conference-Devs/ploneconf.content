@@ -21,6 +21,7 @@
    <element value="legal"/>
    <element value="about"/>
    <element value="sponsorships"/>
+   <element value="slideshow-folder"/>
   </property>
   <property name="parentMetaTypesNotToQuery" type="lines">
    <element value="TempFolder"/>
