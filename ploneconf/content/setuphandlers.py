@@ -13,7 +13,7 @@ def addInitialContent(context):
 
     # bye bye Plone's default content
     existing = site.keys()
-    for n in ('events', 'news', 'front-page'):
+    for n in ('events'):
         if n in existing:
             transaction.begin()
             del site[n]
@@ -53,7 +53,7 @@ def addInitialContent(context):
                 'register': 'Register',
                 'about': 'About',
                 'legal': 'Legal',
-                'slideshow-folder': 'Slideshow Folder'
+                'slideshow-folder': 'Slideshow Folder',
                 } 
                 
     # we should combine these into a mega structure at some point  
@@ -74,7 +74,6 @@ def addInitialContent(context):
     
     workflowTool = getToolByName(site, "portal_workflow")
     # add default pages and folders
-    # TODO: apply template home_page_view to index_html at site root
     for id, title in folders.items():
         if not site.get(id):
             transaction.begin()
