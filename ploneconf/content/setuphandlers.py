@@ -13,7 +13,7 @@ def addInitialContent(context):
 
     # bye bye Plone's default content
     existing = site.keys()
-    for n in ('events', 'front-page'):
+    for n in ('events',):
         if n in existing:
             transaction.begin()
             del site[n]
