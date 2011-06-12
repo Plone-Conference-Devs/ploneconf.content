@@ -13,7 +13,7 @@ def addInitialContent(context):
 
     # bye bye Plone's default content
     existing = site.keys()
-    for n in ('events', 'news', 'front-page'):
+    for n in ('events',):
         if n in existing:
             transaction.begin()
             del site[n]
@@ -53,7 +53,7 @@ def addInitialContent(context):
                 'register': 'Register',
                 'about': 'About',
                 'legal': 'Legal',
-                'slideshow-folder': 'Slideshow Folder'
+                'slideshow-folder': 'Slideshow Folder',
                 } 
                 
     # we should combine these into a mega structure at some point  
@@ -74,7 +74,6 @@ def addInitialContent(context):
     
     workflowTool = getToolByName(site, "portal_workflow")
     # add default pages and folders
-    # TODO: apply template home_page_view to index_html at site root
     for id, title in folders.items():
         if not site.get(id):
             transaction.begin()
@@ -82,16 +81,17 @@ def addInitialContent(context):
             folder = site.get(id)
             workflowTool.doActionFor(folder, "publish")
             transaction.commit()
-            for page in folderContentsMap[id]:
-                if page in pages:
-                    if not folder.get(page):
-                        transaction.begin()
-                        portal_types = getToolByName(folder, "portal_types")
-                        type_info = portal_types.getTypeInfo("Document")
-                        pageObj = type_info._constructInstance(folder, page,
-                                                                title=pages[page])
-                        workflowTool.doActionFor(pageObj, "publish")
-                        transaction.commit()
+            if id in folderContentsMap:
+                for page in folderContentsMap[id]:
+                    if page in pages:
+                        if not folder.get(page):
+                            transaction.begin()
+                            portal_types = getToolByName(folder, "portal_types")
+                            type_info = portal_types.getTypeInfo("Document")
+                            pageObj = type_info._constructInstance(folder, page,
+                                                                    title=pages[page])
+                            workflowTool.doActionFor(pageObj, "publish")
+                            transaction.commit()
             # set the default view of the folder to be that
             # only do this after the home page has been created
             # XXX: somthing is missing here. WhyTF isn't this working

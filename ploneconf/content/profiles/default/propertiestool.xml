@@ -22,6 +22,9 @@
    <element value="about"/>
    <element value="sponsorships"/>
    <element value="slideshow-folder"/>
+   <element value="news"/>
+   <element value="events"/>
+   <element value="ftont-page"/>
   </property>
   <property name="parentMetaTypesNotToQuery" type="lines">
    <element value="TempFolder"/>
