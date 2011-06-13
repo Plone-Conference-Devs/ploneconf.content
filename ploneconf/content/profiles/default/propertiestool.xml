@@ -19,7 +19,6 @@
   <property name="showAllParents" type="boolean">True</property>
   <property name="idsNotToList" type="lines">
    <element value="legal"/>
-   <element value="about"/>
    <element value="sponsorships"/>
    <element value="slideshow-folder"/>
    <element value="news"/>
